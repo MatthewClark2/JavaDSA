@@ -4,11 +4,11 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
-public class LinkedListStackTest {
+public class ArrayStackTest {
 
     @Test
     public void stackIsLIFO() {
-        Stack stack = new LinkedListStack();
+        Stack stack = getStack();
         stack.push("Hello");
         stack.push("World");
 
@@ -16,9 +16,13 @@ public class LinkedListStackTest {
         assertEquals("Hello", stack.pop());
     }
 
+    private Stack getStack() {
+        return new ArrayStack();
+    }
+
     @Test
     public void stackAcceptsNull() {
-        Stack stack = new LinkedListStack();
+        Stack stack = getStack();
         stack.push(null);
 
         assertNull(stack.pop());
@@ -26,13 +30,13 @@ public class LinkedListStackTest {
 
     @Test
     public void emptyStackPopsNull() {
-        Stack stack = new LinkedListStack();
+        Stack stack = getStack();
         assertNull(stack.pop());
     }
 
     @Test
     public void ensurePoppingDecreasesSize() {
-        Stack stack = new LinkedListStack();
+        Stack stack = getStack();
         stack.push("blah");
         stack.push("bleh");
 
@@ -50,12 +54,12 @@ public class LinkedListStackTest {
 
     @Test
     public void ensureNewStackIsEmpty() {
-        assertEquals(0, new LinkedListStack().size());
+        assertEquals(0, getStack().size());
     }
 
     @Test
     public void ensurePushingDecreasesSize() {
-        Stack stack = new LinkedListStack();
+        Stack stack = getStack();
 
         stack.push("hi");
         assertEquals(1, stack.size());
@@ -63,4 +67,5 @@ public class LinkedListStackTest {
         stack.push("shussain");
         assertEquals(2, stack.size());
     }
+
 }
