@@ -6,11 +6,11 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 public class DoublyLinkedListDequeTest {
-    private Deque deque;
+    private Deque<String> deque;
 
     @Before
     public void setup() {
-        deque = new DoublyLinkedListDeque();
+        deque = new DoublyLinkedListDeque<>();
     }
 
     @Test

@@ -1,12 +1,12 @@
 package prj.clark.cs.dsa.struct.deque;
 
-public class DoublyLinkedListDeque implements Deque {
-    private static class Node {
-        String item;
-        Node next;
-        Node prev;
+public class DoublyLinkedListDeque<T> implements Deque<T> {
+    private static class Node<T> {
+        T item;
+        Node<T> next;
+        Node<T> prev;
 
-        Node(String item) {
+        Node(T item) {
             this.item = item;
 
             next = null;
@@ -14,8 +14,8 @@ public class DoublyLinkedListDeque implements Deque {
         }
     }
 
-    private Node left;
-    private Node right;
+    private Node<T> left;
+    private Node<T> right;
     private int size;
 
     public DoublyLinkedListDeque() {
@@ -26,12 +26,12 @@ public class DoublyLinkedListDeque implements Deque {
     }
 
     @Override
-    public String popBack() {
+    public T popBack() {
         if (size <= 0 || left == null) {
             return null;
         }
 
-        String popped = left.item;
+        T popped = left.item;
         left = left.next;
 
         size--;
@@ -40,12 +40,12 @@ public class DoublyLinkedListDeque implements Deque {
     }
 
     @Override
-    public String popFront() {
+    public T popFront() {
         if (size <= 0 || right == null) {
             return null;
         }
 
-        String popped = right.item;
+        T popped = right.item;
         right = right.prev;
 
         size--;
@@ -54,12 +54,12 @@ public class DoublyLinkedListDeque implements Deque {
     }
 
     @Override
-    public void pushBack(String elem) {
+    public void pushBack(T elem) {
         if (left == null) {
-            left = new Node(elem);
+            left = new Node<>(elem);
             left.next = right;
         } else {
-            Node pushed = new Node(elem);
+            Node<T> pushed = new Node<>(elem);
             pushed.prev = null;
             pushed.next = left;
             left = pushed;
@@ -69,12 +69,12 @@ public class DoublyLinkedListDeque implements Deque {
     }
 
     @Override
-    public void pushFront(String elem) {
+    public void pushFront(T elem) {
         if (right == null) {
-            right = new Node(elem);
+            right = new Node<>(elem);
             right.prev = left;
         } else {
-            Node pushed = new Node(elem);
+            Node<T> pushed = new Node<>(elem);
             pushed.next = null;
             pushed.prev = right;
             right = pushed;
