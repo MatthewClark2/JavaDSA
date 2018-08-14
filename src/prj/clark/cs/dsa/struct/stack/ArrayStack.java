@@ -29,11 +29,11 @@ public class ArrayStack<T> implements Stack<T> {
             throw new NoSuchElementException();
         }
 
-        T popped = elements[size - 1];
-
-        elements[size - 1] = null;
-
         size--;
+
+        T popped = elements[size];
+
+        elements[size] = null;
 
         return popped;
     }
