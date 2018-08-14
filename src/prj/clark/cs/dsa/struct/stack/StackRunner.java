@@ -5,8 +5,8 @@ import java.util.function.Consumer;
 public class StackRunner {
     private static final int PROGRAM_WIDTH = 30;
 
-    private static final Consumer<Stack> push = stack -> stack.push("");
-    private static final Consumer<Stack> pop = Stack::pop;
+    private static final Consumer<Stack<String>> push = stack -> stack.push("");
+    private static final Consumer<Stack<String>> pop = Stack::pop;
 
     public static void main(String[] args) {
         long start, end;
@@ -16,8 +16,8 @@ public class StackRunner {
 
         int iterations = getIterations(args);
 
-        Stack arrayStack = new ArrayStack();
-        Stack linkedListStack = new LinkedListStack();
+        Stack<String> arrayStack = new ArrayStack<>();
+        Stack<String> linkedListStack = new LinkedListStack<>();
 
         long[] arrayStackResult = timeStackOperation(
                 arrayStack, push, iterations);
@@ -49,7 +49,7 @@ public class StackRunner {
                 implementation, method, iterations, time);
     }
 
-    private static long[] timeStackOperation(Stack stack, Consumer<Stack> fn, int cycles) {
+    private static long[] timeStackOperation(Stack<String> stack, Consumer<Stack<String>> fn, int cycles) {
         long start, stop;
         start = System.currentTimeMillis();
 

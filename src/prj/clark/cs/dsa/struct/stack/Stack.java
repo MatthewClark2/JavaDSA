@@ -1,9 +1,9 @@
 package prj.clark.cs.dsa.struct.stack;
 
-public interface Stack {
-    String pop();
+public interface Stack<T> {
+    T pop();
 
-    void push(String element);
+    void push(T element);
 
     int size();
 }

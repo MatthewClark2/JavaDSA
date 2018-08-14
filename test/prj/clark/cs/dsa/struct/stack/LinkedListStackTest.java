@@ -6,11 +6,11 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 public class LinkedListStackTest {
-    private Stack stack;
+    private Stack<String> stack;
 
     @Before
     public void setup() {
-        stack = new LinkedListStack();
+        stack = new LinkedListStack<>();
     }
 
     @Test

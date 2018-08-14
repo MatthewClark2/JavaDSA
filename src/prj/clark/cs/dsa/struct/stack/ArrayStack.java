@@ -1,10 +1,10 @@
 package prj.clark.cs.dsa.struct.stack;
 
-public class ArrayStack implements Stack {
+public class ArrayStack<T> implements Stack<T> {
     // This is a common default size for most collections.
     public static final int INITIAL_CAPACITY = 16;
 
-    private String[] strings;
+    private T[] elements;
     private int size;
     private int capacity;
 
@@ -12,21 +12,22 @@ public class ArrayStack implements Stack {
         this(INITIAL_CAPACITY);
     }
 
+    @SuppressWarnings("unchecked")
     public ArrayStack(int initialCapacity) {
-        strings = new String[initialCapacity];
+        elements = (T[]) new Object[initialCapacity];
         size = 0;
         capacity = initialCapacity;
     }
 
     @Override
-    public String pop() {
+    public T pop() {
         if (size <= 0) {
             return null;
         }
 
-        String popped = strings[size - 1];
+        T popped = elements[size - 1];
 
-        strings[size - 1] = null;
+        elements[size - 1] = null;
 
         size--;
 
@@ -34,13 +35,13 @@ public class ArrayStack implements Stack {
     }
 
     @Override
-    public void push(String element) {
+    public void push(T element) {
         if (size >= capacity) {
             reallocateBuffer();
         }
 
         // This could be done in one step, but splitting it in two steps is more explicit.
-        strings[size] = element;
+        elements[size] = element;
         size++;
     }
 
@@ -49,12 +50,13 @@ public class ArrayStack implements Stack {
         return size;
     }
 
+    @SuppressWarnings("unchecked")
     private void reallocateBuffer() {
         capacity <<= 1;
-        String[] newBuffer = new String[capacity];
+        T[] newBuffer = (T[]) new Object[capacity];
 
-        System.arraycopy(strings, 0, newBuffer, 0, strings.length);
+        System.arraycopy(elements, 0, newBuffer, 0, elements.length);
 
-        strings = newBuffer;
+        elements = newBuffer;
     }
 }

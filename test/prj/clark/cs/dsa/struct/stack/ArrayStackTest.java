@@ -7,11 +7,11 @@ import static org.junit.Assert.*;
 
 public class ArrayStackTest {
 
-    private Stack stack;
+    private Stack<String> stack;
 
     @Before
     public void setup() {
-        stack = new ArrayStack();
+        stack = new ArrayStack<>();
     }
 
     @Test

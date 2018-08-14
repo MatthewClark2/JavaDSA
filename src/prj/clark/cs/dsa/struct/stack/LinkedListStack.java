@@ -1,21 +1,21 @@
 package prj.clark.cs.dsa.struct.stack;
 
-public class LinkedListStack implements Stack {
-    private class Node {
-        String item;
+public class LinkedListStack<T> implements Stack<T> {
+    private static class Node<T> {
+        T item;
         Node next;
 
-        Node(String item) {
+        Node(T item) {
             this(item, null);
         }
 
-        Node(String item, Node next) {
+        Node(T item, Node next) {
             this.item = item;
             this.next = next;
         }
     }
 
-    private Node current;
+    private Node<T> current;
     private int size;
 
     public LinkedListStack() {
@@ -23,11 +23,11 @@ public class LinkedListStack implements Stack {
         size = 0;
     }
 
-    public void push(String elem) {
+    public void push(T elem) {
         if (current == null) {
-            current = new Node(elem);
+            current = new Node<>(elem);
         } else {
-            Node pushed = new Node(elem);
+            Node<T> pushed = new Node<>(elem);
             pushed.next = current;
             current = pushed;
         }
@@ -35,15 +35,14 @@ public class LinkedListStack implements Stack {
         size++;
     }
 
-    public String pop() {
+    public T pop() {
         if (current == null) {
-            // TODO (matthew-c21) Have some sort of real behavior.
             return null;
         }
 
         size--;
 
-        String popped = current.item;
+        T popped = current.item;
         current = current.next;
 
         return popped;
