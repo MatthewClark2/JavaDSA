@@ -2,21 +2,17 @@ package prj.clark.cs.dsa.struct.stack;
 
 public class ArrayStack<T> implements Stack<T> {
     // This is a common default size for most collections.
-    public static final int INITIAL_CAPACITY = 16;
+    static final int INITIAL_CAPACITY = 16;
 
     private T[] elements;
     private int size;
     private int capacity;
 
-    public ArrayStack() {
-        this(INITIAL_CAPACITY);
-    }
-
     @SuppressWarnings("unchecked")
-    public ArrayStack(int initialCapacity) {
-        elements = (T[]) new Object[initialCapacity];
+    public ArrayStack() {
+        elements = (T[]) new Object[INITIAL_CAPACITY];
         size = 0;
-        capacity = initialCapacity;
+        capacity = INITIAL_CAPACITY;
     }
 
     @Override
