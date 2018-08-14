@@ -23,6 +23,12 @@ public class LinkedListStack<T> implements Stack<T> {
         size = 0;
     }
 
+    @Override
+    public boolean isEmpty() {
+        return size == 0;
+    }
+
+    @Override
     public void push(T elem) {
         if (current == null) {
             current = new Node<>(elem);
@@ -35,6 +41,7 @@ public class LinkedListStack<T> implements Stack<T> {
         size++;
     }
 
+    @Override
     public T pop() {
         if (current == null) {
             return null;
@@ -48,6 +55,7 @@ public class LinkedListStack<T> implements Stack<T> {
         return popped;
     }
 
+    @Override
     public int size() {
         return size;
     }

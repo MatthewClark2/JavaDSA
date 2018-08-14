@@ -20,6 +20,11 @@ public class ArrayStack<T> implements Stack<T> {
     }
 
     @Override
+    public boolean isEmpty() {
+        return size == 0;
+    }
+
+    @Override
     public T pop() {
         if (size <= 0) {
             return null;

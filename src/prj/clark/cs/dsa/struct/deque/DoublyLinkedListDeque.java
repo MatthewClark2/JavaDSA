@@ -54,6 +54,11 @@ public class DoublyLinkedListDeque<T> implements Deque<T> {
     }
 
     @Override
+    public boolean isEmpty() {
+        return size == 0;
+    }
+
+    @Override
     public void pushBack(T elem) {
         if (left == null) {
             left = new Node<>(elem);

@@ -6,4 +6,5 @@ public interface Deque<T> {
     void pushBack(T elem);
     void pushFront(T elem);
     int size();
+    boolean isEmpty();
 }
