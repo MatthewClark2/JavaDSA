@@ -1,14 +1,21 @@
 package prj.clark.cs.dsa.struct.stack;
 
+import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
 
 public class ArrayStackTest {
 
+    private Stack stack;
+
+    @Before
+    public void setup() {
+        stack = new ArrayStack();
+    }
+
     @Test
     public void stackIsLIFO() {
-        Stack stack = getStack();
         stack.push("Hello");
         stack.push("World");
 
@@ -16,13 +23,8 @@ public class ArrayStackTest {
         assertEquals("Hello", stack.pop());
     }
 
-    private Stack getStack() {
-        return new ArrayStack();
-    }
-
     @Test
     public void stackAcceptsNull() {
-        Stack stack = getStack();
         stack.push(null);
 
         assertNull(stack.pop());
@@ -30,13 +32,11 @@ public class ArrayStackTest {
 
     @Test
     public void emptyStackPopsNull() {
-        Stack stack = getStack();
         assertNull(stack.pop());
     }
 
     @Test
-    public void ensurePoppingDecreasesSize() {
-        Stack stack = getStack();
+    public void poppingDecreasesSize() {
         stack.push("blah");
         stack.push("bleh");
 
@@ -53,13 +53,7 @@ public class ArrayStackTest {
     }
 
     @Test
-    public void ensureNewStackIsEmpty() {
-        assertEquals(0, getStack().size());
-    }
-
-    @Test
-    public void ensurePushingDecreasesSize() {
-        Stack stack = getStack();
+    public void pushingDecreasesSize() {
 
         stack.push("hi");
         assertEquals(1, stack.size());
@@ -70,7 +64,6 @@ public class ArrayStackTest {
 
     @Test
     public void stackResizesAutomatically() {
-        Stack stack = getStack();
         for (int i = 0; i < ArrayStack.INITIAL_CAPACITY + 5; ++i) {
             stack.push("hi");
         }

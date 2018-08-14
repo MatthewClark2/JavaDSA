@@ -1,14 +1,20 @@
 package prj.clark.cs.dsa.struct.stack;
 
+import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
 
 public class LinkedListStackTest {
+    private Stack stack;
+
+    @Before
+    public void setup() {
+        stack = new LinkedListStack();
+    }
 
     @Test
     public void stackIsLIFO() {
-        Stack stack = getStack();
         stack.push("Hello");
         stack.push("World");
 
@@ -16,13 +22,9 @@ public class LinkedListStackTest {
         assertEquals("Hello", stack.pop());
     }
 
-    private Stack getStack() {
-        return new LinkedListStack();
-    }
 
     @Test
     public void stackAcceptsNull() {
-        Stack stack = getStack();
         stack.push(null);
 
         assertNull(stack.pop());
@@ -30,14 +32,12 @@ public class LinkedListStackTest {
 
     @Test
     public void emptyStackPopsNull() {
-        Stack stack = getStack();
         assertNull(stack.pop());
     }
 
     @Test
-    public void ensurePoppingDecreasesSize() {
-        Stack stack = getStack();
-        stack.push("blah");
+    public void poppingDecreasesSize() {
+        stack.push("asdf");
         stack.push("bleh");
 
         assertEquals(2, stack.size());
@@ -53,13 +53,7 @@ public class LinkedListStackTest {
     }
 
     @Test
-    public void ensureNewStackIsEmpty() {
-        assertEquals(0, getStack().size());
-    }
-
-    @Test
-    public void ensurePushingDecreasesSize() {
-        Stack stack = getStack();
+    public void pushingDecreasesSize() {
 
         stack.push("hi");
         assertEquals(1, stack.size());
