@@ -26,7 +26,7 @@ public class DoublyLinkedListDeque<T> implements Deque<T> {
     }
 
     @Override
-    public T popBack() {
+    public T popLeft() {
         if (size <= 0 || left == null) {
             return null;
         }
@@ -40,7 +40,7 @@ public class DoublyLinkedListDeque<T> implements Deque<T> {
     }
 
     @Override
-    public T popFront() {
+    public T popRight() {
         if (size <= 0 || right == null) {
             return null;
         }
@@ -59,7 +59,7 @@ public class DoublyLinkedListDeque<T> implements Deque<T> {
     }
 
     @Override
-    public void pushBack(T elem) {
+    public void pushLeft(T elem) {
         if (left == null) {
             left = new Node<>(elem);
             left.next = right;
@@ -74,7 +74,7 @@ public class DoublyLinkedListDeque<T> implements Deque<T> {
     }
 
     @Override
-    public void pushFront(T elem) {
+    public void pushRight(T elem) {
         if (right == null) {
             right = new Node<>(elem);
             right.prev = left;

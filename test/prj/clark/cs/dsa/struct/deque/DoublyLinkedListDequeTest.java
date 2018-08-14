@@ -27,142 +27,142 @@ public class DoublyLinkedListDequeTest {
     @Test
     public void leftPushedDequeNotEmpty() {
         assertTrue(deque.isEmpty());
-        deque.pushBack("hi");
+        deque.pushLeft("hi");
         assertFalse(deque.isEmpty());
     }
 
     @Test
     public void rightPushedDequeNotEmpty() {
         assertTrue(deque.isEmpty());
-        deque.pushFront("hi");
+        deque.pushRight("hi");
         assertFalse(deque.isEmpty());
     }
 
     @Test
     public void leftPoppedDequeBecomesEmpty() {
-        deque.pushBack("hi");
-        deque.popBack();
+        deque.pushLeft("hi");
+        deque.popLeft();
         assertTrue(deque.isEmpty());
     }
 
     @Test
     public void leftWorksAsLIFO() {
-        deque.pushBack("Hello");
-        deque.pushBack("World");
+        deque.pushLeft("Hello");
+        deque.pushLeft("World");
 
-        assertEquals("World", deque.popBack());
-        assertEquals("Hello", deque.popBack());
+        assertEquals("World", deque.popLeft());
+        assertEquals("Hello", deque.popLeft());
     }
 
     @Test
     public void rightWorksAsLIFO() {
-        deque.pushFront("Foo");
-        deque.pushFront("Bar");
+        deque.pushRight("Foo");
+        deque.pushRight("Bar");
 
-        assertEquals("Bar", deque.popFront());
-        assertEquals("Foo", deque.popFront());
+        assertEquals("Bar", deque.popRight());
+        assertEquals("Foo", deque.popRight());
     }
 
     @Test
     public void wrapsCorrectlyToRight() {
-        deque.pushFront("Biff");
-        deque.pushBack("Fuzz");
-        deque.pushBack("Qux");
+        deque.pushRight("Biff");
+        deque.pushLeft("Fuzz");
+        deque.pushLeft("Qux");
 
-        assertEquals("Qux", deque.popBack());
-        assertEquals("Fuzz", deque.popBack());
-        assertEquals("Biff", deque.popBack());
+        assertEquals("Qux", deque.popLeft());
+        assertEquals("Fuzz", deque.popLeft());
+        assertEquals("Biff", deque.popLeft());
     }
 
     @Test
     public void wrapsCorrectlyToLeft() {
-        deque.pushBack("Java");
-        deque.pushFront("Groovy");
-        deque.pushFront("Clojure");
+        deque.pushLeft("Java");
+        deque.pushRight("Groovy");
+        deque.pushRight("Clojure");
 
-        assertEquals("Clojure", deque.popFront());
-        assertEquals("Groovy", deque.popFront());
-        assertEquals("Java", deque.popFront());
+        assertEquals("Clojure", deque.popRight());
+        assertEquals("Groovy", deque.popRight());
+        assertEquals("Java", deque.popRight());
     }
 
     @Test
     public void emptyReturnsNullLeft() {
-        assertNull(deque.popBack());
+        assertNull(deque.popLeft());
     }
 
     @Test
     public void emptyReturnsNullRight() {
-        assertNull(deque.popFront());
+        assertNull(deque.popRight());
     }
 
     @Test
     public void popLeftDecreasesSize() {
-        deque.pushBack("Hello");
-        deque.pushBack("World");
+        deque.pushLeft("Hello");
+        deque.pushLeft("World");
 
-        deque.popBack();
+        deque.popLeft();
         assertEquals(1, deque.size());
 
-        deque.popBack();
+        deque.popLeft();
         assertEquals(0, deque.size());
     }
 
     @Test
     public void emptyPopsDoNotAffectSize() {
-        deque.popBack();
+        deque.popLeft();
         assertEquals(0, deque.size());
-        deque.popFront();
+        deque.popRight();
         assertEquals(0, deque.size());
     }
 
     @Test
     public void popRightDecreasesSize() {
-        deque.pushFront("Scheme");
-        deque.pushFront("Common Lisp");
+        deque.pushRight("Scheme");
+        deque.pushRight("Common Lisp");
 
-        deque.popFront();
+        deque.popRight();
         assertEquals(1, deque.size());
 
-        deque.popFront();
+        deque.popRight();
         assertEquals(0, deque.size());
     }
 
     @Test
     public void mixedPopsDecreaseSize() {
-        deque.pushFront("OCaml");
-        deque.pushBack("Haskell");
+        deque.pushRight("OCaml");
+        deque.pushLeft("Haskell");
 
-        deque.popFront();
+        deque.popRight();
         assertEquals(1, deque.size());
 
-        deque.popBack();
+        deque.popLeft();
         assertEquals(0, deque.size());
     }
 
     @Test
     public void pushLeftIncreasesSize() {
-        deque.pushBack("Fortran");
+        deque.pushLeft("Fortran");
         assertEquals(1, deque.size());
 
-        deque.pushBack("COBOL");
+        deque.pushLeft("COBOL");
         assertEquals(2, deque.size());
     }
 
     @Test
     public void pushRightIncreasesSize() {
-        deque.pushFront("Rust");
+        deque.pushRight("Rust");
         assertEquals(1, deque.size());
 
-        deque.pushFront("Golang");
+        deque.pushRight("Golang");
         assertEquals(2, deque.size());
     }
 
     @Test
     public void mixedPushesIncreaseSize() {
-        deque.pushFront("Kotlin");
+        deque.pushRight("Kotlin");
         assertEquals(1, deque.size());
 
-        deque.pushBack("Scala");
+        deque.pushLeft("Scala");
         assertEquals(2, deque.size());
     }
 }
