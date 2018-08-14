@@ -1,5 +1,8 @@
 package prj.clark.cs.dsa.struct.stack;
 
+import java.util.Iterator;
+import java.util.NoSuchElementException;
+
 public class ArrayStack<T> implements Stack<T> {
     // This is a common default size for most collections.
     static final int INITIAL_CAPACITY = 16;
@@ -51,6 +54,11 @@ public class ArrayStack<T> implements Stack<T> {
         return size;
     }
 
+    @Override
+    public Iterator<T> iterator() {
+        return new ArrayStackIterator();
+    }
+
     @SuppressWarnings("unchecked")
     private void reallocateBuffer() {
         capacity <<= 1;
@@ -59,5 +67,29 @@ public class ArrayStack<T> implements Stack<T> {
         System.arraycopy(elements, 0, newBuffer, 0, elements.length);
 
         elements = newBuffer;
+    }
+
+    private class ArrayStackIterator implements Iterator<T> {
+        private int position;
+
+        ArrayStackIterator() {
+            position = 0;
+        }
+
+        @Override
+        public boolean hasNext() {
+            return position < size;
+        }
+
+        @Override
+        public T next() {
+            if (! hasNext()) {
+                throw new NoSuchElementException();
+            }
+
+            T next = elements[position];
+            position++;
+            return next;
+        }
     }
 }
