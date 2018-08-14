@@ -15,6 +15,39 @@ public class ArrayStackTest {
     }
 
     @Test
+    public void newStackIsEmpty() {
+        assertEquals(0, stack.size());
+    }
+
+    @Test
+    public void sizeZeroWhenEmpty() {
+        assertEquals(0, stack.size());
+        assertTrue(stack.isEmpty());
+    }
+
+    @Test
+    public void pushedStackNotEmpty() {
+        assertTrue(stack.isEmpty());
+
+        stack.push("");
+
+        assertFalse(stack.isEmpty());
+    }
+
+    @Test
+    public void poppedStackBecomesEmpty() {
+        assertTrue(stack.isEmpty());
+
+        stack.push("");
+
+        assertFalse(stack.isEmpty());
+
+        stack.pop();
+
+        assertTrue(stack.isEmpty());
+    }
+
+    @Test
     public void stackIsLIFO() {
         stack.push("Hello");
         stack.push("World");

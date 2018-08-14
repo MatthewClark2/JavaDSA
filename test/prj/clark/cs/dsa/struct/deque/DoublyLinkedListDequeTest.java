@@ -15,7 +15,34 @@ public class DoublyLinkedListDequeTest {
 
     @Test
     public void dllStartsEmpty() {
+        assertTrue(deque.isEmpty());
+    }
+
+    @Test
+    public void sizeZeroWhenEmpty() {
         assertEquals(0, deque.size());
+        assertTrue(deque.isEmpty());
+    }
+
+    @Test
+    public void leftPushedDequeNotEmpty() {
+        assertTrue(deque.isEmpty());
+        deque.pushBack("hi");
+        assertFalse(deque.isEmpty());
+    }
+
+    @Test
+    public void rightPushedDequeNotEmpty() {
+        assertTrue(deque.isEmpty());
+        deque.pushFront("hi");
+        assertFalse(deque.isEmpty());
+    }
+
+    @Test
+    public void leftPoppedDequeBecomesEmpty() {
+        deque.pushBack("hi");
+        deque.popBack();
+        assertTrue(deque.isEmpty());
     }
 
     @Test
