@@ -3,6 +3,8 @@ package prj.clark.cs.dsa.struct.stack;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.NoSuchElementException;
+
 import static org.junit.Assert.*;
 
 public class LinkedListStackTest {
@@ -63,9 +65,9 @@ public class LinkedListStackTest {
         assertNull(stack.pop());
     }
 
-    @Test
-    public void emptyStackPopsNull() {
-        assertNull(stack.pop());
+    @Test(expected = NoSuchElementException.class)
+    public void emptyStackThrowsException() {
+        stack.pop();
     }
 
     @Test
@@ -77,9 +79,6 @@ public class LinkedListStackTest {
 
         stack.pop();
         assertEquals(1, stack.size());
-
-        stack.pop();
-        assertEquals(0, stack.size());
 
         stack.pop();
         assertEquals(0, stack.size());

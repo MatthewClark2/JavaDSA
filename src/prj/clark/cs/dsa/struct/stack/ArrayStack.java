@@ -26,7 +26,7 @@ public class ArrayStack<T> implements Stack<T> {
     @Override
     public T pop() {
         if (size <= 0) {
-            return null;
+            throw new NoSuchElementException();
         }
 
         T popped = elements[size - 1];

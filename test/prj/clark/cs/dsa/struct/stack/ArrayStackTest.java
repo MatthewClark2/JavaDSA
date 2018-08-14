@@ -69,9 +69,9 @@ public class ArrayStackTest {
         assertNull(stack.pop());
     }
 
-    @Test
-    public void emptyStackPopsNull() {
-        assertNull(stack.pop());
+    @Test(expected = NoSuchElementException.class)
+    public void emptyStackThrowsException() {
+        stack.pop();
     }
 
     @Test
@@ -83,9 +83,6 @@ public class ArrayStackTest {
 
         stack.pop();
         assertEquals(1, stack.size());
-
-        stack.pop();
-        assertEquals(0, stack.size());
 
         stack.pop();
         assertEquals(0, stack.size());
