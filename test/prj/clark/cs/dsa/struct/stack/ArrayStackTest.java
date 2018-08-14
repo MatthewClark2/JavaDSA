@@ -68,4 +68,12 @@ public class ArrayStackTest {
         assertEquals(2, stack.size());
     }
 
+    @Test
+    public void stackResizesAutomatically() {
+        Stack stack = getStack();
+        for (int i = 0; i < ArrayStack.INITIAL_CAPACITY + 5; ++i) {
+            stack.push("hi");
+        }
+    }
+
 }

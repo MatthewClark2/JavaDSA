@@ -2,7 +2,7 @@ package prj.clark.cs.dsa.struct.stack;
 
 public class ArrayStack implements Stack {
     // This is a common default size for most collections.
-    private static final int INITIAL_CAPACITY = 16;
+    public static final int INITIAL_CAPACITY = 16;
 
     private String[] strings;
     private int size;
