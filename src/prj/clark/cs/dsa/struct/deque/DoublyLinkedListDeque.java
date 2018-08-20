@@ -1,10 +1,10 @@
 package prj.clark.cs.dsa.struct.deque;
 
 public class DoublyLinkedListDeque<T> implements Deque<T> {
-    private static class Node<T> {
+    private class Node {
         T item;
-        Node<T> next;
-        Node<T> prev;
+        Node next;
+        Node prev;
 
         Node(T item) {
             this.item = item;
@@ -14,8 +14,8 @@ public class DoublyLinkedListDeque<T> implements Deque<T> {
         }
     }
 
-    private Node<T> left;
-    private Node<T> right;
+    private Node left;
+    private Node right;
     private int size;
 
     public DoublyLinkedListDeque() {
@@ -61,10 +61,10 @@ public class DoublyLinkedListDeque<T> implements Deque<T> {
     @Override
     public void pushLeft(T elem) {
         if (left == null) {
-            left = new Node<>(elem);
+            left = new Node(elem);
             left.next = right;
         } else {
-            Node<T> pushed = new Node<>(elem);
+            Node pushed = new Node(elem);
             pushed.prev = null;
             pushed.next = left;
             left = pushed;
@@ -76,10 +76,10 @@ public class DoublyLinkedListDeque<T> implements Deque<T> {
     @Override
     public void pushRight(T elem) {
         if (right == null) {
-            right = new Node<>(elem);
+            right = new Node(elem);
             right.prev = left;
         } else {
-            Node<T> pushed = new Node<>(elem);
+            Node pushed = new Node(elem);
             pushed.next = null;
             pushed.prev = right;
             right = pushed;
