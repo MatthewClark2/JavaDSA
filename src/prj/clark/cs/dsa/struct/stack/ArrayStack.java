@@ -83,7 +83,8 @@ public class ArrayStack<T> implements Stack<T> {
         capacity = size;
         T[] newBuffer = (T[]) new Object[capacity];
 
-        System.arraycopy(elements, 0, newBuffer, 0, elements.length);
+        System.arraycopy(elements, 0, newBuffer, 0,
+                Math.min(elements.length, newBuffer.length));
 
         elements = newBuffer;
     }

@@ -102,6 +102,10 @@ public class ArrayStackTest {
         for (int i = 0; i < ArrayStack.INITIAL_CAPACITY + 5; ++i) {
             stack.push("hi");
         }
+
+        for (int i = stack.size(); i > 0; --i) {
+            stack.pop();
+        }
     }
 
     @Test
