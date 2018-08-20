@@ -1,5 +1,7 @@
 package prj.clark.cs.dsa.struct.deque;
 
+import java.util.Iterator;
+
 public class DoublyLinkedListDeque<T> implements Deque<T> {
     private class Node {
         T item;
@@ -11,6 +13,16 @@ public class DoublyLinkedListDeque<T> implements Deque<T> {
 
             next = null;
             prev = null;
+        }
+
+        void append(Node next) {
+            this.next = next;
+            next.prev = this;
+        }
+
+        void prepend(Node prev) {
+            this.prev = prev;
+            prev.next = this;
         }
     }
 
@@ -27,7 +39,7 @@ public class DoublyLinkedListDeque<T> implements Deque<T> {
 
     @Override
     public T popLeft() {
-        if (size <= 0 || left == null) {
+        if (size <= 0) {
             return null;
         }
 
@@ -41,7 +53,7 @@ public class DoublyLinkedListDeque<T> implements Deque<T> {
 
     @Override
     public T popRight() {
-        if (size <= 0 || right == null) {
+        if (size <= 0) {
             return null;
         }
 
@@ -60,13 +72,11 @@ public class DoublyLinkedListDeque<T> implements Deque<T> {
 
     @Override
     public void pushLeft(T elem) {
-        if (left == null) {
-            left = new Node(elem);
-            left.next = right;
+        if (left == null && right == null) {
+            left = right = new Node(elem);
         } else {
             Node pushed = new Node(elem);
-            pushed.prev = null;
-            pushed.next = left;
+            left.prepend(pushed);
             left = pushed;
         }
 
@@ -75,13 +85,11 @@ public class DoublyLinkedListDeque<T> implements Deque<T> {
 
     @Override
     public void pushRight(T elem) {
-        if (right == null) {
-            right = new Node(elem);
-            right.prev = left;
+        if (right == null && left == null) {
+            left = right = new Node(elem);
         } else {
             Node pushed = new Node(elem);
-            pushed.next = null;
-            pushed.prev = right;
+            right.append(pushed);
             right = pushed;
         }
 
@@ -91,5 +99,31 @@ public class DoublyLinkedListDeque<T> implements Deque<T> {
     @Override
     public int size() {
         return size;
+    }
+
+    @Override
+    public Iterator<T> iterator() {
+        return new DoublyLinkedListDequeIterator();
+    }
+
+    private class DoublyLinkedListDequeIterator implements Iterator<T> {
+        private Node curr;
+
+        private DoublyLinkedListDequeIterator() {
+            curr = left;
+        }
+
+        @Override
+        public boolean hasNext() {
+            return curr != null;
+        }
+
+        @Override
+        public T next() {
+            T next = curr.item;
+            curr = curr.next;
+
+            return next;
+        }
     }
 }

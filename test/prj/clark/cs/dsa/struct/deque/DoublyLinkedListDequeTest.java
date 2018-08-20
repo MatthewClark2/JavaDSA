@@ -3,6 +3,8 @@ package prj.clark.cs.dsa.struct.deque;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.Iterator;
+
 import static org.junit.Assert.*;
 
 public class DoublyLinkedListDequeTest {
@@ -164,5 +166,85 @@ public class DoublyLinkedListDequeTest {
 
         deque.pushLeft("Scala");
         assertEquals(2, deque.size());
+    }
+
+    @Test
+    public void emptyIteratorHasNoNext() {
+        assertFalse(deque.iterator().hasNext());
+    }
+
+    @Test
+    public void nonEmptyIteratorHasNext() {
+        deque.pushLeft("");
+        assertTrue(deque.iterator().hasNext());
+
+        deque = new DoublyLinkedListDeque<>();
+        deque.pushRight("");
+        assertTrue(deque.iterator().hasNext());
+    }
+
+    @Test
+    public void vanillaIteratorCheck() {
+        String[] expected = {"hello", "world", "iteration", "!"};
+        deque.pushLeft("!");
+        deque.pushLeft("iteration");
+        deque.pushLeft("world");
+        deque.pushLeft("hello");
+
+        int pos = 0;
+
+        for (String s : deque) {
+            assertEquals(expected[pos++], s);
+        }
+
+        assertEquals(4, pos);
+    }
+
+    @Test
+    public void iteratorWorksFromRightPushes() {
+        String[] expected = {"hello", "world", "iteration", "!"};
+        deque.pushRight("hello");
+        deque.pushRight("world");
+        deque.pushRight("iteration");
+        deque.pushRight("!");
+
+        int pos = 0;
+
+        for (String s : deque) {
+            assertEquals(expected[pos++], s);
+        }
+
+        assertEquals(4, pos);
+    }
+
+    @Test
+    public void iteratorWorksWithMixedPushes() {
+        String[] expected = {"hello", "world", "iteration", "!"};
+        deque.pushRight("iteration");
+        deque.pushLeft("world");
+        deque.pushLeft("hello");
+        deque.pushRight("!");
+
+        int pos = 0;
+
+        for (String s : deque) {
+            assertEquals(expected[pos++], s);
+        }
+
+        assertEquals(4, pos);
+    }
+
+    @Test(expected = UnsupportedOperationException.class)
+    public void iteratorMayNotRemoveItems() {
+        deque.iterator().remove();
+    }
+
+    @Test
+    public void movesLeftSeamlessly() {
+        deque.pushLeft("foo");
+        deque.pushRight("baz");
+
+        assertEquals("foo", deque.popLeft());
+        assertEquals("baz", deque.popLeft());
     }
 }
