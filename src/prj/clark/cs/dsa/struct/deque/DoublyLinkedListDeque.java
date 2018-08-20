@@ -1,6 +1,7 @@
 package prj.clark.cs.dsa.struct.deque;
 
 import java.util.Iterator;
+import java.util.NoSuchElementException;
 
 public class DoublyLinkedListDeque<T> implements Deque<T> {
     private class Node {
@@ -40,7 +41,7 @@ public class DoublyLinkedListDeque<T> implements Deque<T> {
     @Override
     public T popLeft() {
         if (size <= 0) {
-            return null;
+            throw new NoSuchElementException();
         }
 
         T popped = left.item;
@@ -54,7 +55,7 @@ public class DoublyLinkedListDeque<T> implements Deque<T> {
     @Override
     public T popRight() {
         if (size <= 0) {
-            return null;
+            throw new NoSuchElementException();
         }
 
         T popped = right.item;
@@ -120,6 +121,10 @@ public class DoublyLinkedListDeque<T> implements Deque<T> {
 
         @Override
         public T next() {
+            if (! hasNext()) {
+                throw new NoSuchElementException();
+            }
+
             T next = curr.item;
             curr = curr.next;
 

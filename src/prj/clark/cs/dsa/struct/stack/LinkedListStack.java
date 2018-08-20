@@ -8,7 +8,7 @@ public class LinkedListStack<T> implements Stack<T> {
         T item;
         Node next;
         Node prev;
-        
+
         Node(T item, Node next) {
             this.item = item;
             this.next = next;

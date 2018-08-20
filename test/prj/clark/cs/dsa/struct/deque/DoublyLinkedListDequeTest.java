@@ -4,6 +4,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.util.Iterator;
+import java.util.NoSuchElementException;
 
 import static org.junit.Assert.*;
 
@@ -87,14 +88,26 @@ public class DoublyLinkedListDequeTest {
         assertEquals("Java", deque.popRight());
     }
 
-    @Test
-    public void emptyReturnsNullLeft() {
-        assertNull(deque.popLeft());
+    @Test(expected = NoSuchElementException.class)
+    public void emptyPopThrowsExceptionLeft() {
+        deque.popLeft();
+    }
+
+    @Test(expected = NoSuchElementException.class)
+    public void emptyPopThrowsExceptionRight() {
+        deque.popRight();
     }
 
     @Test
-    public void emptyReturnsNullRight() {
-        assertNull(deque.popRight());
+    public void mixedPopDoesNotThrowExceptionLeft() {
+        deque.pushRight("Hello");
+        deque.popLeft();
+    }
+
+    @Test
+    public void mixedPopDoesNotThrowExceptionRight() {
+        deque.pushLeft("World");
+        deque.popRight();
     }
 
     @Test
@@ -106,14 +119,6 @@ public class DoublyLinkedListDequeTest {
         assertEquals(1, deque.size());
 
         deque.popLeft();
-        assertEquals(0, deque.size());
-    }
-
-    @Test
-    public void emptyPopsDoNotAffectSize() {
-        deque.popLeft();
-        assertEquals(0, deque.size());
-        deque.popRight();
         assertEquals(0, deque.size());
     }
 
@@ -171,6 +176,11 @@ public class DoublyLinkedListDequeTest {
     @Test
     public void emptyIteratorHasNoNext() {
         assertFalse(deque.iterator().hasNext());
+    }
+
+    @Test(expected = NoSuchElementException.class)
+    public void emptyIteratorThrowsException() {
+        deque.iterator().next();
     }
 
     @Test
