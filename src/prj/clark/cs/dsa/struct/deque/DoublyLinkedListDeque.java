@@ -7,7 +7,7 @@ import java.util.NoSuchElementException;
  * Doubly linked list implementation of a deque.
  *
  * Insertion and removal from either end of this structure is O(1). Memory usage is O(n).
- * @param <T>
+ * @param <T> the type of elements stored in the queue.
  */
 public class DoublyLinkedListDeque<T> implements Deque<T> {
     private class Node {
