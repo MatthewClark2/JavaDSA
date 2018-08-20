@@ -63,7 +63,18 @@ public class StackRunner {
     }
 
     private static int getIterations(String[] args) {
-        return 10000000;
+        int iterations = 10000000;
+
+        for (String arg : args) {
+            if (arg.startsWith("--count=")) {
+                iterations = Integer.parseInt(arg.substring(8));
+                break;
+            } else {
+                throw new IllegalArgumentException(arg + " is not a supported argument.");
+            }
+        }
+
+        return iterations;
     }
 
     private static long elapsed(long[] longs) {
