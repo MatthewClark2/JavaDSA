@@ -3,6 +3,12 @@ package prj.clark.cs.dsa.struct.stack;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
+/**
+ * Stack implementation backed by a linked list.
+ *
+ * Pushes and pops are both in O(1). Memory usage is O(n).
+ * @param <T>
+ */
 public class LinkedListStack<T> implements Stack<T> {
     private class Node {
         T item;

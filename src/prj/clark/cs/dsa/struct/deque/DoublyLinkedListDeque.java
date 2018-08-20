@@ -3,6 +3,12 @@ package prj.clark.cs.dsa.struct.deque;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
+/**
+ * Doubly linked list implementation of a deque.
+ *
+ * Insertion and removal from either end of this structure is O(1). Memory usage is O(n).
+ * @param <T>
+ */
 public class DoublyLinkedListDeque<T> implements Deque<T> {
     private class Node {
         T item;

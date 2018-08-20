@@ -8,6 +8,12 @@ public class StackRunner {
     private static final Consumer<Stack<String>> push = stack -> stack.push("");
     private static final Consumer<Stack<String>> pop = Stack::pop;
 
+    /**
+     * Runs a basic test to check the speed of both stack implementations.
+     * @param args command line arguments. Currently, only --count=[int] is supported.
+     *             If provided, this sets the iteration count for the tests. By default, it is
+     *             1000000.
+     */
     public static void main(String[] args) {
         long start, end;
 

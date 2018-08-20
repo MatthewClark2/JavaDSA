@@ -3,6 +3,16 @@ package prj.clark.cs.dsa.struct.stack;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
+/**
+ * Array-backed stack implementation.
+ *
+ * Pushes are in amortized O(1), while pops are explicitly O(1). Memory usage scales with the
+ * maximum number of elements that are ever in the stack.
+ *
+ * Note that this structure can grow when elements are pushed onto it, but it will not shrink when
+ * elements are removed, as it works under the assumption that they may be added back later.
+ * @param <T> the type of object stored by this stack.
+ */
 public class ArrayStack<T> implements Stack<T> {
     // This is a common default size for most collections.
     static final int INITIAL_CAPACITY = 16;
@@ -13,6 +23,7 @@ public class ArrayStack<T> implements Stack<T> {
 
     @SuppressWarnings("unchecked")
     public ArrayStack() {
+        // A T[] may not be instantiated directly due to the limitations of Java's generics.
         elements = (T[]) new Object[INITIAL_CAPACITY];
         size = 0;
         capacity = INITIAL_CAPACITY;
