@@ -7,7 +7,7 @@ import java.util.NoSuchElementException;
  * Array-backed stack implementation.
  *
  * Pushes are in amortized O(1), while pops are explicitly O(1). Memory usage scales with the
- * maximum number of elements that are ever in the stack.
+ * number of elements that are in the stack.
  *
  * Note that this structure can grow when elements are pushed onto it, but it will not shrink when
  * elements are removed, as it works under the assumption that they may be added back later.
@@ -16,6 +16,8 @@ import java.util.NoSuchElementException;
 public class ArrayStack<T> implements Stack<T> {
     // This is a common default size for most collections.
     static final int INITIAL_CAPACITY = 16;
+
+    private static final double MINIMUM_LOAD_CAPACITY = 0.25;
 
     private T[] elements;
     private int size;
@@ -40,6 +42,12 @@ public class ArrayStack<T> implements Stack<T> {
             throw new NoSuchElementException();
         }
 
+        // We only deallocate space if we drop below a specified threshold, and have expanded
+        // the buffer.
+        if (capacity > INITIAL_CAPACITY && ((double) size) / capacity <= MINIMUM_LOAD_CAPACITY) {
+            reallocateBuffer(capacity / 2);
+        }
+
         size--;
 
         T popped = elements[size];
@@ -52,7 +60,7 @@ public class ArrayStack<T> implements Stack<T> {
     @Override
     public void push(T element) {
         if (size >= capacity) {
-            reallocateBuffer();
+            reallocateBuffer(capacity * 2);
         }
 
         // This could be done in one step, but splitting it in two steps is more explicit.
@@ -71,8 +79,8 @@ public class ArrayStack<T> implements Stack<T> {
     }
 
     @SuppressWarnings("unchecked")
-    private void reallocateBuffer() {
-        capacity <<= 1;
+    private void reallocateBuffer(int size) {
+        capacity = size;
         T[] newBuffer = (T[]) new Object[capacity];
 
         System.arraycopy(elements, 0, newBuffer, 0, elements.length);
