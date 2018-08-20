@@ -3,6 +3,9 @@ package prj.clark.cs.dsa.struct.stack;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
+import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 import static org.junit.Assert.*;
@@ -92,5 +95,50 @@ public class LinkedListStackTest {
 
         stack.push("shussain");
         assertEquals(2, stack.size());
+    }
+
+    @Test
+    public void iteratorContainsCorrectElements() {
+        String[] elements = {"Hello", "World", "Dr.", "Hussain"};
+
+        stack.push("Hello");
+        stack.push("World");
+        stack.push("Dr.");
+        stack.push("Hussain");
+
+        int pos = 0;
+
+        for (String s : stack) {
+            assertEquals(elements[pos++], s);
+        }
+
+        assertEquals(4, pos);
+    }
+
+    @Test(expected = NoSuchElementException.class)
+    public void emptyIteratorThrowsException() {
+        Iterator<String> i = stack.iterator();
+        i.next();
+    }
+
+    @Test(expected = UnsupportedOperationException.class)
+    public void iteratorRemovalThrowsException() {
+        stack.push("data");
+        Iterator<String> i = stack.iterator();
+        i.remove();
+    }
+
+    @Test
+    public void vanillaForeachCase() {
+        ByteArrayOutputStream output = new ByteArrayOutputStream();
+        PrintStream os = new PrintStream(output);
+
+        stack.push("Stack");
+        stack.push("of");
+        stack.push("plates");
+
+        stack.forEach(os::println);
+
+        assertEquals("Stack\nof\nplates\n", output.toString());
     }
 }

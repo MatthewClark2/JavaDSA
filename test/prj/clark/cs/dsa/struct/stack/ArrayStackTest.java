@@ -117,9 +117,10 @@ public class ArrayStackTest {
         int pos = 0;
 
         for (String s : stack) {
-            assertEquals(elements[pos], s);
-            pos++;
+            assertEquals(elements[pos++], s);
         }
+
+        assertEquals(4, pos);
     }
 
     @Test(expected = NoSuchElementException.class)
