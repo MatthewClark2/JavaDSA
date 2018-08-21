@@ -99,7 +99,7 @@ public class ArrayStackTest {
 
     @Test
     public void stackResizesAutomatically() {
-        for (int i = 0; i < ArrayStack.INITIAL_CAPACITY + 5; ++i) {
+        for (int i = 0; i < 100000; ++i) {
             stack.push("hi");
         }
 

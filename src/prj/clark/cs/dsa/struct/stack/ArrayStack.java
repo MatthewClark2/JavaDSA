@@ -15,7 +15,7 @@ import java.util.NoSuchElementException;
  */
 public class ArrayStack<T> implements Stack<T> {
     // This is a common default size for most collections.
-    static final int INITIAL_CAPACITY = 16;
+    private static final int INITIAL_CAPACITY = 16;
 
     private static final double MINIMUM_LOAD_CAPACITY = 0.25;
 
