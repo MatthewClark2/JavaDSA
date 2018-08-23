@@ -13,16 +13,10 @@ public class LinkedListStack<T> implements Stack<T> {
     private class Node {
         T item;
         Node next;
-        Node prev;
 
         Node(T item, Node next) {
             this.item = item;
             this.next = next;
-
-            // If it is null, then we don't have to set anything since there is nothing there.
-            if (next != null) {
-                next.prev = this;
-            }
         }
     }
 
@@ -74,7 +68,7 @@ public class LinkedListStack<T> implements Stack<T> {
         private Node node;
 
         LinkedListStackIterator() {
-            node = findRoot();
+            node = current;
         }
 
         @Override
@@ -89,7 +83,7 @@ public class LinkedListStack<T> implements Stack<T> {
             }
 
             T next = node.item;
-            node = node.prev;
+            node = node.next;
             return next;
         }
 

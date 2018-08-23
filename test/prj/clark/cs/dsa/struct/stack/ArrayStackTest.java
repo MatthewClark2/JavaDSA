@@ -112,10 +112,10 @@ public class ArrayStackTest {
     public void iteratorContainsCorrectElements() {
         String[] elements = {"Hello", "World", "Dr.", "Hussain"};
 
-        stack.push("Hello");
-        stack.push("World");
-        stack.push("Dr.");
         stack.push("Hussain");
+        stack.push("Dr.");
+        stack.push("World");
+        stack.push("Hello");
 
         int pos = 0;
 
@@ -134,7 +134,6 @@ public class ArrayStackTest {
 
     @Test(expected = UnsupportedOperationException.class)
     public void iteratorRemovalThrowsException() {
-        stack.push("data");
         Iterator<String> i = stack.iterator();
         i.remove();
     }
@@ -144,9 +143,9 @@ public class ArrayStackTest {
         ByteArrayOutputStream output = new ByteArrayOutputStream();
         PrintStream os = new PrintStream(output);
 
-        stack.push("Stack");
-        stack.push("of");
         stack.push("plates");
+        stack.push("of");
+        stack.push("Stack");
 
         stack.forEach(os::println);
 

@@ -3,9 +3,8 @@ package prj.clark.cs.dsa.struct.stack;
 /**
  * Standard interface for a classical first in, last out data structure.
  *
- * It should be noted that iterators for implementing classes should yield the oldest elements in
- * the stack first, and move forward to newer ones. This behavior is in line with the existing
- * {@link java.util.Stack} class.
+ * It should be noted that iterators for implementing classes should yield the elements from the
+ * top, similarly to how they would be popped off over time.
  * @param <T> the type of element contained on the stack.
  */
 public interface Stack<T> extends Iterable<T> {

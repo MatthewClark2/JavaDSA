@@ -93,12 +93,12 @@ public class ArrayStack<T> implements Stack<T> {
         private int position;
 
         ArrayStackIterator() {
-            position = 0;
+            position = size - 1;
         }
 
         @Override
         public boolean hasNext() {
-            return position < size;
+            return position > -1;
         }
 
         @Override
@@ -107,9 +107,7 @@ public class ArrayStack<T> implements Stack<T> {
                 throw new NoSuchElementException();
             }
 
-            T next = elements[position];
-            position++;
-            return next;
+            return elements[position--];
         }
     }
 }
