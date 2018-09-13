@@ -14,7 +14,7 @@ import java.util.NoSuchElementException;
  * @param <T> the type of object stored by this stack.
  */
 public class ArrayStack<T> implements Stack<T> {
-    // This is a common default size for most collections.
+    // This is a common default getSize for most collections.
     private static final int INITIAL_CAPACITY = 16;
 
     private static final double MINIMUM_LOAD_CAPACITY = 0.25;
