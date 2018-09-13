@@ -22,7 +22,7 @@ public class BinarySearchTreeSymbolTableTest {
 
     @Test
     public void emptyTableIsEmpty() {
-        assertFalse(st.isEmpty());
+        assertTrue(st.isEmpty());
     }
 
     @Test
