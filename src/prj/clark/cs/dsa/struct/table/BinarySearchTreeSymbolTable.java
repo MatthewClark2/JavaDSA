@@ -113,6 +113,10 @@ public class BinarySearchTreeSymbolTable<K extends Comparable<K>, V> implements 
 
     @Override
     public boolean contains(K key) {
+        if (empty()) {
+            return false;
+        }
+
         Optional<Node> result = root.findChild(key);
 
         return result.isPresent();
@@ -124,6 +128,9 @@ public class BinarySearchTreeSymbolTable<K extends Comparable<K>, V> implements 
          * Find the node to be deleted.
          * Add the children of the node to the tree.
          */
+        if (empty()) {
+            return;
+        }
 
         Optional<Node> deleted = root.findChild(key);
         if (deleted.isPresent()) {
