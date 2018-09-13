@@ -96,4 +96,50 @@ public class BinarySearchTreeSymbolTableTest {
         assertTrue(st.contains("c"));
         assertTrue(st.contains("d"));
     }
+
+    @Test
+    public void addingElementsChangesSize() {
+        st.put("", 0);
+        assertEquals(1, st.getSize());
+        st.put(" ", 1);
+        assertEquals(2, st.getSize());
+    }
+
+    @Test
+    public void removingElementsChangesSize() {
+        st.put("142", 142);
+        st.put("65", 65);
+
+        st.delete("142");
+        assertEquals(1, st.getSize());
+
+        st.delete("65");
+        assertEquals(0, st.getSize());
+    }
+
+    @Test
+    public void clearingRemovesAllElements() {
+        st.put("foo", 5);
+        st.put("bar", 6);
+        st.put("baz", 7);
+
+        assertEquals(3, st.getSize());
+        st.clear();
+
+        assertFalse(st.contains("foo"));
+        assertFalse(st.contains("bar"));
+        assertFalse(st.contains("baz"));
+    }
+
+    @Test
+    public void clearingResetsSize() {
+        st.put("foo", 5);
+        st.put("bar", 6);
+        st.put("baz", 7);
+
+        assertEquals(3, st.getSize());
+        st.clear();
+
+        assertEquals(0, st.getSize());
+    }
 }

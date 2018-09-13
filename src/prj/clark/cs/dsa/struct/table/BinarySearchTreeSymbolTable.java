@@ -124,26 +124,7 @@ public class BinarySearchTreeSymbolTable<K extends Comparable<K>, V> implements 
 
     @Override
     public void delete(K key) {
-        /*
-         * Find the node to be deleted.
-         * Add the children of the node to the tree.
-         */
-        if (empty()) {
-            return;
-        }
-
-        Optional<Node> deleted = root.findChild(key);
-        if (deleted.isPresent()) {
-            Node node = deleted.get();
-
-            // Perform a deep search of the child nodes in order to find all children in the tree. Add each child to
-            // root.
-            for (Node child : allChildren(node)) {
-                root.addChild(child);
-            }
-        }
-
-        size--;
+        // For now, we won't worry about it.
     }
 
     @Override
@@ -152,6 +133,7 @@ public class BinarySearchTreeSymbolTable<K extends Comparable<K>, V> implements 
         // easily, and also makes it more similar to other languages.
         root.clear();
         root = null;
+        size = 0;
     }
 
     @Override
@@ -181,13 +163,13 @@ public class BinarySearchTreeSymbolTable<K extends Comparable<K>, V> implements 
             return acc;
         }
 
+        acc.add(root);
+
         if (root.left != null) {
-            acc.add(root.left);
             return allChildren(acc, root.left);
         }
 
         if (root.right != null) {
-            acc.add(root.right);
             return allChildren(acc, root.right);
         }
 
