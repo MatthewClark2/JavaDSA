@@ -6,7 +6,7 @@ import java.util.Comparator;
 
 public class BottomUpMergesort implements Sorter {
     @Override
-    public <T, U extends Comparable<T>> void sort(U[] objs) {
+    public <T extends Comparable<T>> void sort(T[] objs) {
 
     }
 

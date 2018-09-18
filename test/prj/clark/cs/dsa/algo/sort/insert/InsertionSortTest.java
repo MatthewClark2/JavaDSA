@@ -1,4 +1,4 @@
-package prj.clark.cs.dsa.algo.sort.quick;
+package prj.clark.cs.dsa.algo.sort.insert;
 
 import org.junit.Test;
 import prj.clark.cs.dsa.algo.sort.Sorter;
@@ -7,9 +7,9 @@ import java.util.Comparator;
 
 import static org.junit.Assert.*;
 
-public class QuickSortTest {
+public class InsertionSortTest {
     private Sorter getSorter() {
-        return new QuickSort();
+        return new InsertionSort();
     }
 
     private static <T extends Comparable<T>> void sorted(T[] elems) {

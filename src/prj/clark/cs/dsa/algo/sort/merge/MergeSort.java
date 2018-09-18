@@ -14,7 +14,7 @@ public class MergeSort implements Sorter {
     }
 
     @Override
-    public <T, U extends Comparable<T>> void sort(U[] objs) {
+    public <T extends Comparable<T>> void sort(T[] objs) {
 
     }
 

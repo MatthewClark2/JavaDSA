@@ -6,7 +6,8 @@ import java.util.Comparator;
 
 public class QuickSort implements Sorter {
     @Override
-    public <T, U extends Comparable<T>> void sort(U[] objs) {
+    public <T extends Comparable<T>> void sort(T[] objs) {
+        // I literally don't know how to write the generics for this.
     }
 
     @Override
