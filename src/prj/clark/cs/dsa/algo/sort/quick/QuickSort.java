@@ -7,7 +7,6 @@ import java.util.Comparator;
 public class QuickSort implements Sorter {
     @Override
     public <T, U extends Comparable<T>> void sort(U[] objs) {
-
     }
 
     @Override
@@ -30,9 +29,10 @@ public class QuickSort implements Sorter {
     private static <T> int partition(T[] a, int lo, int hi, Comparator<T> cmp) {
         int i = lo;
         int j = hi + 1;
+        T init = a[lo];
         while (true) {
-            while (less(cmp, a[++i], a[lo]) && i != hi);  // Find item on left to swap.
-            while (less(cmp, a[--j], a[lo]) && j != lo);  // Find item on right to swap.
+            while (less(cmp, a[++i], init) && i != hi);  // Find item on left to swap.
+            while (less(cmp, init, a[--j]) && j != lo);  // Find item on right to swap.
 
             if (i >= j) break;  // Check if the two values have crossed.
 

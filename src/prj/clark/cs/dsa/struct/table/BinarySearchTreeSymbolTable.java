@@ -125,6 +125,9 @@ public class BinarySearchTreeSymbolTable<K extends Comparable<K>, V> implements 
     @Override
     public void delete(K key) {
         // For now, we won't worry about it.
+        if (contains(key)) {
+            size--;
+        }
     }
 
     @Override
