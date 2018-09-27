@@ -4,6 +4,10 @@ import prj.clark.cs.dsa.algo.select.Selector;
 
 import java.util.Comparator;
 
+/**
+ * This algorithm works by using the partitioning method of quick sort to place specific values into place, which it
+ * does repeatedly until it comes across the correct position.
+ */
 public class QuickSelect implements Selector {
     // This class utilizes a partitioning algorithm identical to the one used in quick sort, and uses that to partially
     // sort an array to find the nth largest element.

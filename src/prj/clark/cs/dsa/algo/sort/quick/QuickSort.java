@@ -4,6 +4,14 @@ import prj.clark.cs.dsa.algo.sort.Sorter;
 
 import java.util.Comparator;
 
+/**
+ * Quick sort is the de facto best sorting algorithm available for the general case. It works by using a divide and
+ * conquer strategy, partitioning the array into somewhat organized subarrays until the array is in order. The average
+ * running time is O(n log(n)), although the worst case is O(n^2). For this reason, you may see some implementations
+ * initially shuffle the underlying array in order to avoid the worst case of a sorted array. There are also other
+ * implementations that each have their own runtime quirks, but this is the classical rendition. The sort is done in
+ * place, and is not stable.
+ */
 public class QuickSort implements Sorter {
     @Override
     public <T extends Comparable<T>> void sort(T[] objs) {

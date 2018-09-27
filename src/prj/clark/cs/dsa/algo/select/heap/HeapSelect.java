@@ -6,6 +6,10 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.PriorityQueue;
 
+/**
+ * Selecting the nth smallest element is easy when using a priority queue with the smallest values removed first.
+ * Runtime is O(log(n)), and the search is not done in place, giving it a memory use of O(n).
+ */
 public class HeapSelect implements Selector {
 
     @Override

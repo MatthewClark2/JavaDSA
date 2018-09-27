@@ -91,10 +91,10 @@ public class BinarySearchTreeSymbolTableTest {
 
         st.delete("a");
 
-        assertFalse(st.contains("a"));
         assertTrue(st.contains("b"));
         assertTrue(st.contains("c"));
         assertTrue(st.contains("d"));
+        assertFalse(st.contains("a"));
     }
 
     @Test

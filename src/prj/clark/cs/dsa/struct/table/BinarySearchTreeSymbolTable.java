@@ -124,10 +124,64 @@ public class BinarySearchTreeSymbolTable<K extends Comparable<K>, V> implements 
 
     @Override
     public void delete(K key) {
-        // For now, we won't worry about it.
         if (contains(key)) {
             size--;
+
+            root = delete(key, root);
         }
+    }
+
+    private Node delete(K key, Node node) {
+        if (node == null) {
+            return null;
+        }
+
+        int cmp = key.compareTo(node.key);
+
+        if (cmp < 0) {
+            node.left = delete(key, node.left);
+        } else if (cmp > 0) {
+            node.right = delete(key, node.right);
+        } else {
+            // If there is only one subtree, just return that.
+            if (node.right == null) {
+                return node.left;
+            } else if (node.left == null) {
+                return node.right;
+            }
+
+            // Otherwise, start moving the node.
+            Node copy = node;
+
+            // Find the minimum viable node from the right subtree to ensure that all elements are still correctly
+            // placed.
+            node = min(copy.right);
+
+            // Finds the parent of the smallest node on the right subtree.
+            node.right = deleteMin(key, copy.right);
+
+            // Update the left regularly.
+            node.left = copy.left;
+        }
+
+        return node;
+    }
+
+    private Node deleteMin(K key, Node node) {
+        if (node.left == null) {
+            return node.right;
+        }
+
+        node.left = deleteMin(key, node);
+        return node;
+    }
+
+    private Node min(Node start) {
+        if (start.left == null) {
+            return start;
+        }
+
+        return min(start.left);
     }
 
     @Override
