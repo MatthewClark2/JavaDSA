@@ -1,7 +1,5 @@
 package prj.clark.cs.dsa.struct.table;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
 
@@ -17,69 +15,6 @@ public class BinarySearchTreeSymbolTable<K extends Comparable<K>, V> implements 
             this.value = value;
             left = right = null;
         }
-
-        void addChild(Node child) {
-            // Throw an exception if child is null.
-            int cmp = child.key.compareTo(this.key);
-
-            if (cmp < 0) {
-                pushLeft(child);
-            } else if (cmp > 0) {
-                pushRight(child);
-            } else {
-                // The key is equivalent, so we copy it. In Rust or C++, this would be moved.
-                this.key = child.key;
-                this.value = child.value;
-            }
-        }
-
-        private void pushLeft(Node child) {
-            if (left == null) {
-                left = child;
-            } else {
-                left.addChild(child);
-            }
-        }
-
-        private void pushRight(Node child) {
-            if (right == null) {
-                right = child;
-            } else {
-                right.addChild(child);
-            }
-        }
-
-        private Optional<Node> findChild(K key) {
-            return findChild(this, key);
-        }
-
-        private Optional<Node> findChild(Node start, K key) {
-            if (start == null) {
-                return Optional.empty();
-            }
-
-            int cmp = key.compareTo(start.key);
-
-            if (cmp == 0) {
-                return Optional.of(start);
-            } else if (cmp < 0) {
-                return findChild(start.left, key);
-            } else {
-                return findChild(start.right, key);
-            }
-        }
-
-        private void clear() {
-            if (this.left != null) {
-                left.clear();
-            }
-
-            if (this.right != null) {
-                right.clear();
-            }
-
-            left = right = null;
-        }
     }
 
     private Node root;
@@ -89,21 +24,50 @@ public class BinarySearchTreeSymbolTable<K extends Comparable<K>, V> implements 
         root = null;
     }
 
-    @Override
-    public void put(K key, V value) {
-        Node emplaced = new Node(key, value);
-        if (empty()) {
-            root = emplaced;
-        } else {
-            root.addChild(emplaced);
+    private Optional<Node> findChild(Node node, K key) {
+        if (node == null) {
+            return Optional.empty();
         }
 
+        int cmp = key.compareTo(node.key);
+
+        if (cmp < 0) {
+            return findChild(node.left, key);
+        } else if (cmp > 0) {
+            return findChild(node.right, key);
+        }
+
+        return Optional.of(node);
+    }
+
+    @Override
+    public void put(K key, V value) {
+        root = put(root, key, value);
         size++;
+    }
+
+    private Node put(Node node, K key, V value) {
+        if (node == null) {
+            return new Node(key, value);
+        }
+
+        int cmp = key.compareTo(node.key);
+
+        if (cmp < 0) {
+            node.left = put(node.left, key, value);
+        } else if (cmp > 0) {
+            node.right = put(node.right, key, value);
+        } else {
+            node.value = value;
+        }
+
+        return node;
     }
 
     @Override
     public V get(K key) {
-        Optional<Node> result = root.findChild(key);
+        Optional<Node> result = findChild(root, key);
+
         if (result.isPresent()) {
             return result.get().value;
         }
@@ -113,13 +77,7 @@ public class BinarySearchTreeSymbolTable<K extends Comparable<K>, V> implements 
 
     @Override
     public boolean contains(K key) {
-        if (empty()) {
-            return false;
-        }
-
-        Optional<Node> result = root.findChild(key);
-
-        return result.isPresent();
+        return findChild(root, key).isPresent();
     }
 
     @Override
@@ -186,9 +144,6 @@ public class BinarySearchTreeSymbolTable<K extends Comparable<K>, V> implements 
 
     @Override
     public void clear() {
-        // The JVM should clear all this memory by itself, but doing so explicitly helps us to reason about memory more
-        // easily, and also makes it more similar to other languages.
-        root.clear();
         root = null;
         size = 0;
     }
@@ -205,31 +160,5 @@ public class BinarySearchTreeSymbolTable<K extends Comparable<K>, V> implements 
 
     private boolean empty() {
         return root == null;
-    }
-
-    private List<Node> allChildren(Node root) {
-        if (root == null) {
-            throw new NullPointerException();
-        }
-
-        return allChildren(new ArrayList<>(), root);
-    }
-
-    private List<Node> allChildren(List<Node> acc, Node root) {
-        if (root == null) {
-            return acc;
-        }
-
-        acc.add(root);
-
-        if (root.left != null) {
-            return allChildren(acc, root.left);
-        }
-
-        if (root.right != null) {
-            return allChildren(acc, root.right);
-        }
-
-        return acc;
     }
 }
