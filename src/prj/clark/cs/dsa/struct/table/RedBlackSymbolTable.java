@@ -5,7 +5,7 @@ import java.util.Optional;
 
 /**
  * Balanced implementation of the {@link BinarySearchTreeSymbolTable}. This works similarly to a
- * {@link TwoThreeSymbolTable}, but uses "red" links as glue instead of directly joining nodes to form three nodes due
+ * Two-Three Symbol Table, but uses "red" links as glue instead of directly joining nodes to form three nodes due
  * to the complexity of representation.
  * Red links follow given rules:
  * - No node has two red links.
