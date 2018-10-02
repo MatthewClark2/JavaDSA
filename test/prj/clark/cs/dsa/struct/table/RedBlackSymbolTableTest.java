@@ -7,12 +7,12 @@ import java.util.NoSuchElementException;
 
 import static org.junit.Assert.*;
 
-public class BinarySearchTreeSymbolTableTest {
+public class RedBlackSymbolTableTest {
     private SymbolTable<String, Integer> st;
 
     @Before
     public void setUp() {
-        st = new BinarySearchTreeSymbolTable<>();
+        st = new RedBlackSymbolTable<>();
     }
 
     @Test
