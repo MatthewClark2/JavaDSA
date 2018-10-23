@@ -147,4 +147,17 @@ public class RedBlackSymbolTableTest {
     public void emptyTreeContainsNoElements() {
         assertFalse(st.contains("hello"));
     }
+
+    @Test
+    public void shockTest() {
+        for (int i = 0; i < 1000; ++i) {
+            st.put("" + i + "\uffff", i);
+        }
+
+        for (int i = 0; i < 1000; ++i) {
+            assertTrue(st.contains("" + i + "\uffff"));
+            st.delete("" + i + "\uffff");
+            assertFalse(st.contains("" + i + "\uffff"));
+        }
+    }
 }

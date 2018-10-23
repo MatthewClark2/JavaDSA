@@ -3,6 +3,7 @@ package prj.clark.cs.dsa.struct.table;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.ArrayList;
 import java.util.NoSuchElementException;
 
 import static org.junit.Assert.*;
@@ -146,5 +147,18 @@ public class BinarySearchTreeSymbolTableTest {
     @Test
     public void emptyTreeContainsNoElements() {
         assertFalse(st.contains("hello"));
+    }
+
+    @Test
+    public void shockTest() {
+        for (int i = 0; i < 1000; ++i) {
+            st.put("" + i + "\uffff", i);
+        }
+
+        for (int i = 0; i < 1000; ++i) {
+            assertTrue(st.contains("" + i + "\uffff"));
+            st.delete("" + i);
+            assertFalse(st.contains("" + i + "\uffff"));
+        }
     }
 }

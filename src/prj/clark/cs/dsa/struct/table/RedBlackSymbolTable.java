@@ -200,17 +200,16 @@ public class RedBlackSymbolTable<K extends Comparable<K>, V> implements SymbolTa
             // Update the left regularly.
             node.left = copy.left;
 
-            // RBT rebalancing.
             if (isRed(node.right) && !isRed(node.left)) {
                 node = rotateLeft(node);
             }
 
             if (isRed(node.left) && isRed(node.left.left)) {
-                flipColors(node);
+                node = rotateRight(node);
             }
 
             if (isRed(node.left) && isRed(node.right)) {
-                node = rotateRight(node);
+                flipColors(node);
             }
         }
 
