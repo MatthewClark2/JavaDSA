@@ -1,37 +1,35 @@
 package prj.clark.cs.dsa.struct.graph;
 
-import prj.clark.cs.dsa.algo.sort.priority.UnorderedArrayPriorityQueue;
-
 import java.util.ArrayList;
 import java.util.List;
 
-public class BreadthFirstPaths<E> implements Paths<E> {
+public class BreadthFirstPaths implements Paths {
     private boolean[] marked;
-    private E[] edgeTo;
+    private int[] edgeTo;
     private int[] distanceto;
-    private final E origin;
+    private final int origin;
 
     @SuppressWarnings("unchecked")
-    private BreadthFirstPaths(Graph<E> g, E origin) {
-        marked = new boolean[g.vertices()];
-        edgeTo = (E[]) (new Object[g.vertices()]);
+    private BreadthFirstPaths(Graph g, int origin) {
+        marked = new boolean[g.getVertices()];
+        edgeTo = new int[g.getVertices()];
         this.origin = origin;
-        distanceto = new int[g.vertices()];
+        distanceto = new int[g.getVertices()];
         breadthFirstSearch(g, origin);
     }
 
-    private void breadthFirstSearch(Graph<E> g, E e) {
+    private void breadthFirstSearch(Graph g, int e) {
         // We're using an arraylist as a queue.
-        List<E> q = new ArrayList<>();
+        List<Integer> q = new ArrayList<>();
         q.add(e);
 
         marked[hash(e)] = true;
         distanceto[hash(e)] = 0;
 
         while(! q.isEmpty()) {
-            E v = q.remove(0);
+            int v = q.remove(0);
 
-            for (E w : g.adjacent(v)) {
+            for  (int w : g.adjacent(v)) {
                 if (! marked[hash(w)]) {
                     q.add(w);
                     marked[hash(w)] = true;
@@ -42,21 +40,21 @@ public class BreadthFirstPaths<E> implements Paths<E> {
         }
     }
 
-    public static <T> Paths<T> from(Graph<T> g, T origin) {
-        return new BreadthFirstPaths<>(g, origin);
+    public static Paths from(Graph g, int origin) {
+        return new BreadthFirstPaths(g, origin);
     }
 
     @Override
-    public boolean hasPath(E e) {
+    public boolean hasPath (int e) {
         return marked[hash(e)];
     }
 
     @Override
-    public Iterable<E> pathTo(E e) {
+    public Iterable<Integer> pathTo (int e) {
         return null;
     }
 
-    private int hash(E e) {
-        return (e.hashCode() & 0x1fffffff) % marked.length;
+    private int hash(int e) {
+        return (e & 0x1fffffff) % marked.length;
     }
 }

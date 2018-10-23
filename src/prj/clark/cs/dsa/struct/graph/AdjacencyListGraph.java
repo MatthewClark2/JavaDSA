@@ -1,46 +1,50 @@
 package prj.clark.cs.dsa.struct.graph;
 
 import prj.clark.cs.dsa.struct.bag.Bag;
+import prj.clark.cs.dsa.struct.bag.StackBag;
 
 /**
  * This class is useful for sparse, undirected graph implementations. Densely packed graphs may
  * prefer a matrix backed implementation.
  * This implementation is undirected.
- * @param <E>
  */
-public class AdjacencyListGraph<E> implements Graph<E> {
+public class AdjacencyListGraph implements Graph {
     private final int vertices;
-
-    // For the sake of generics, this will act like a poor man's hashmap.
-    private Bag<E>[] adj;
+    private int edges;
+    private Bag<Integer>[] adj;
 
     @SuppressWarnings("unchecked")
     public AdjacencyListGraph(int vertices) {
         this.vertices = vertices;
-        adj = (Bag<E>[]) (new Object[vertices]);
+        adj = (Bag<Integer>[]) (new Object[vertices]);
+        for (int i = 0; i < adj.length; ++i) {
+            adj[i] = new StackBag<>();
+        }
     }
 
     @Override
-    public void addEdge(E e1, E e2) {
-
+    public void addEdge(int a, int b) {
+        adj[hash(a)].add(b);
+        adj[hash(b)].add(a);
+        edges++;
     }
 
     @Override
-    public Iterable<E> adjacent(E e) {
-        return null;
+    public int getVertices() {
+        return vertices;
     }
 
     @Override
-    public int vertices() {
-        return 0;
+    public int getEdges() {
+        return edges;
     }
 
     @Override
-    public int edges() {
-        return 0;
+    public Iterable<Integer> adjacent(int e) {
+        return adj[hash(e)];
     }
 
-    private int hash(E e) {
-        return (e.hashCode() & 0x1fffffff) % vertices;
+    private int hash(int k) {
+        return (k & 0x1fffffff) % vertices;
     }
 }

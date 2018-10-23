@@ -12,8 +12,8 @@ public class DepthFirstPaths<E> implements Paths<E> {
 
     @SuppressWarnings("unchecked")
     private DepthFirstPaths(Graph<E> g, E origin) {
-        marked = new boolean[g.vertices()];
-        edgesTo = (E[]) (new Object[g.vertices()]);
+        marked = new boolean[g.getVertices()];
+        edgesTo = (E[]) (new Object[g.getVertices()]);
         this.origin = origin;
 
         depthFirstSearch(g, origin);

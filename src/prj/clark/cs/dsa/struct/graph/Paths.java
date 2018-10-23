@@ -1,7 +1,7 @@
 package prj.clark.cs.dsa.struct.graph;
 
-public interface Paths<E> {
-    boolean hasPath(E e);
+public interface Paths {
+    boolean hasPath(int e);
 
-    Iterable<E> pathTo(E e);
+    Iterable<Integer> pathTo(int e);
 }

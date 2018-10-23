@@ -3,8 +3,15 @@ package prj.clark.cs.dsa.struct.bag;
 import prj.clark.cs.dsa.struct.stack.ArrayStack;
 import prj.clark.cs.dsa.struct.stack.Stack;
 
+import java.util.Iterator;
+
 public class StackBag<T> implements Bag<T> {
     private Stack<T> elements;
+
+    @Override
+    public Iterator<T> iterator() {
+        return elements.iterator();
+    }
 
     public StackBag() {
         elements = new ArrayStack<>();
