@@ -3,6 +3,8 @@ package prj.clark.cs.dsa.struct.graph;
 import prj.clark.cs.dsa.struct.bag.Bag;
 import prj.clark.cs.dsa.struct.bag.StackBag;
 
+import java.util.NoSuchElementException;
+
 /**
  * This class is useful for sparse, undirected graph implementations. Densely packed graphs may
  * prefer a matrix backed implementation.
@@ -13,10 +15,16 @@ public class AdjacencyListGraph implements Graph {
     private int edges;
     private Bag<Integer>[] adj;
 
+    /**
+     * Creates a new Adjacency list graph with serialized integers as nodes.
+     * @param vertices the number of available vertices. Available vertices to make connections between range from 0 to
+     *                 this value minus 1.
+     */
+
     @SuppressWarnings("unchecked")
     public AdjacencyListGraph(int vertices) {
         this.vertices = vertices;
-        adj = (Bag<Integer>[]) (new Object[vertices]);
+        adj = (Bag<Integer>[]) (new Bag[vertices]);
         for (int i = 0; i < adj.length; ++i) {
             adj[i] = new StackBag<>();
         }
@@ -24,8 +32,10 @@ public class AdjacencyListGraph implements Graph {
 
     @Override
     public void addEdge(int a, int b) {
-        adj[hash(a)].add(b);
-        adj[hash(b)].add(a);
+        validateVertex(a);
+        validateVertex(b);
+        adj[a].add(b);
+        adj[b].add(a);
         edges++;
     }
 
@@ -41,10 +51,13 @@ public class AdjacencyListGraph implements Graph {
 
     @Override
     public Iterable<Integer> adjacent(int e) {
-        return adj[hash(e)];
+        validateVertex(e);
+        return adj[e];
     }
 
-    private int hash(int k) {
-        return (k & 0x1fffffff) % vertices;
+    private void validateVertex(int a) {
+        if (a >= vertices || a < 0) {
+            throw new NoSuchElementException();
+        }
     }
 }

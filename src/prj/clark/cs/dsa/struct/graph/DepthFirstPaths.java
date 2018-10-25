@@ -5,57 +5,51 @@ import prj.clark.cs.dsa.struct.stack.Stack;
 
 import java.util.Iterator;
 
-public class DepthFirstPaths<E> implements Paths<E> {
+public class DepthFirstPaths implements Paths {
     private boolean[] marked;
-    private E[] edgesTo;
-    private final E origin;
+    private int[] edgesTo;
+    private final int origin;
 
     @SuppressWarnings("unchecked")
-    private DepthFirstPaths(Graph<E> g, E origin) {
+    private DepthFirstPaths(Graph g, int origin) {
         marked = new boolean[g.getVertices()];
-        edgesTo = (E[]) (new Object[g.getVertices()]);
+        edgesTo = new int[g.getVertices()];
         this.origin = origin;
 
         depthFirstSearch(g, origin);
     }
 
-    private void depthFirstSearch(Graph<E> g, E origin) {
-        marked[hash(origin)] = true;
+    private void depthFirstSearch(Graph g, int origin) {
+        marked[origin] = true;
 
-        for (E e : g.adjacent(origin)) {
-            int currHash = hash(e);
-
-            if (! marked[currHash]) {
-                edgesTo[currHash] = origin;
+        for (int e : g.adjacent(origin)) {
+            if (! marked[e]) {
+                edgesTo[e] = origin;
                 depthFirstSearch(g, e);
             }
         }
     }
 
-    public static <T> Paths<T> from(Graph<T> g, T origin) {
-        return new DepthFirstPaths<T>(g, origin);
-    }
-
-    private int hash(E e) {
-        return (e.hashCode() & 0x1fffffff) % marked.length;
+    public static Paths from(Graph g, int origin) {
+        return new DepthFirstPaths(g, origin);
     }
 
     @Override
-    public boolean hasPath(E e) {
-        return marked[hash(e)];
+    public boolean hasPath(int e) {
+        return marked[e];
     }
 
     @Override
-    public Iterable<E> pathTo(E e) {
+    public Iterable<Integer> pathTo(int e) {
         if (! hasPath(e)) {
-            return () -> new Iterator<E>() {
+            return () -> new Iterator<Integer>() {
                 @Override
                 public boolean hasNext() {
                     return false;
                 }
 
                 @Override
-                public E next() {
+                public Integer next() {
                     return null;
                 }
             };
@@ -63,8 +57,8 @@ public class DepthFirstPaths<E> implements Paths<E> {
 
         // You can use any iterable that features a reverse iterator since we're making a stack based search.
 
-        Stack<E> path = new ArrayStack<>();
-        for (E curr = e; curr != origin; curr = edgesTo[hash(curr)]) {
+        Stack<Integer> path = new ArrayStack<>();
+        for (int curr = e; curr != origin; curr = edgesTo[curr]) {
             path.push(curr);
         }
 
