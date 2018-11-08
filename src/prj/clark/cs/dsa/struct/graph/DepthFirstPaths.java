@@ -11,7 +11,7 @@ public class DepthFirstPaths implements Paths {
     private final int origin;
 
     @SuppressWarnings("unchecked")
-    private DepthFirstPaths(Graph g, int origin) {
+    public DepthFirstPaths(Graph g, int origin) {
         marked = new boolean[g.getVertices()];
         edgesTo = new int[g.getVertices()];
         this.origin = origin;
@@ -30,10 +30,6 @@ public class DepthFirstPaths implements Paths {
         }
     }
 
-    public static Paths from(Graph g, int origin) {
-        return new DepthFirstPaths(g, origin);
-    }
-
     @Override
     public boolean hasPath(int e) {
         return marked[e];
@@ -41,20 +37,6 @@ public class DepthFirstPaths implements Paths {
 
     @Override
     public Iterable<Integer> pathTo(int e) {
-        if (! hasPath(e)) {
-            return () -> new Iterator<Integer>() {
-                @Override
-                public boolean hasNext() {
-                    return false;
-                }
-
-                @Override
-                public Integer next() {
-                    return null;
-                }
-            };
-        }
-
         // You can use any iterable that features a reverse iterator since we're making a stack based search.
 
         Stack<Integer> path = new ArrayStack<>();
