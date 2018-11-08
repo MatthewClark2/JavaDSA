@@ -21,10 +21,14 @@ public class MinimumPriorityQueueTest {
     }
 
     @Test(expected = NoSuchElementException.class)
-    public void emptyPeekThrows() {}
+    public void emptyPeekThrows() {
+        pq.head();
+    }
 
     @Test(expected = NoSuchElementException.class)
-    public void emptyRemoveThrows() {}
+    public void emptyRemoveThrows() {
+        pq.deleteHead();
+    }
 
     @Test
     public void headUpdatesCorrectly() {

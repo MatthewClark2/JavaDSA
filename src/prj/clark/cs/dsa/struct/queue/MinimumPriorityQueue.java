@@ -67,11 +67,11 @@ public class MinimumPriorityQueue<E> implements PriorityQueue<E> {
     private void sink(int pos) {
         while (2 * pos <= size) {
             int j = 2 * pos;
-            if (j < size && lt(cmp, j, j+1)) {
+            if (j < size && gt(cmp, j, j+1)) {
                 j++;
             }
 
-            if (!lt(cmp, pos, j)) {
+            if (!gt(cmp, pos, j)) {
                 break;
             }
 
@@ -81,7 +81,7 @@ public class MinimumPriorityQueue<E> implements PriorityQueue<E> {
     }
 
     private void swim(int pos) {
-        while (pos > 1 && lt(cmp, pos / 2, pos)) {
+        while (pos > 1 && gt(cmp, pos / 2, pos)) {
             exchange(pos / 2, pos);
             pos /= 2;
         }
@@ -93,13 +93,13 @@ public class MinimumPriorityQueue<E> implements PriorityQueue<E> {
         elems[pos2] = tmp;
     }
 
-    private boolean lt(Comparator<E> cmp, int pos1, int pos2) {
-        return cmp.compare(elems[pos1], elems[pos2]) < 0;
+    private boolean gt(Comparator<E> cmp, int pos1, int pos2) {
+        return cmp.compare(elems[pos1], elems[pos2]) > 0;
     }
 
     @SuppressWarnings("unchecked")
     private void ensureCapacity() {
-        if (size >= capacity) {
+        if (size + 1>= capacity) {
             capacity *= 2;
             E[] buf = (E[]) (new Object[capacity]);
             System.arraycopy(elems, 0, buf, 0, elems.length);
