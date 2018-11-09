@@ -42,6 +42,7 @@ public class EdgeWeightedGraph {
     }
 
     public Iterable<Edge> adjacents(int k) {
+        validate(k);
         return adjacencyLists[k];
     }
 
@@ -76,8 +77,12 @@ public class EdgeWeightedGraph {
         int i = e.either();
         int k = e.other(i);
 
-        if (i < 0 || k < 0 || i >= vertices || k >= vertices) {
-            // Attempt to add an edge between vertices that are not on the graph.
+        validate(i);
+        validate(k);
+    }
+
+    private void validate(int k) {
+        if (k < 0 || k >= vertices) {
             throw new NoSuchElementException();
         }
     }
