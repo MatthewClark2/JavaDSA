@@ -5,6 +5,11 @@ public class WeightedQuickUnionFind implements UnionFind {
     private int[] componentSizes;
     private int count;
 
+    /**
+     * Creates a new object with components from 0 to components - 1. Attempting to use any other value with this will
+     * result in a {@link java.util.NoSuchElementException}.
+     * @param components the number of components to be a part of the union find.
+     */
     public WeightedQuickUnionFind(int components) {
         count = components;
         componentSizes = new int[components];
