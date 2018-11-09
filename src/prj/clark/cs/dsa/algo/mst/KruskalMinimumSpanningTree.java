@@ -34,6 +34,7 @@ public class KruskalMinimumSpanningTree implements MinimumSpanningTree {
     public KruskalMinimumSpanningTree(EdgeWeightedGraph g) {
         minimumSpanningTree = new WrapperQueue<>();
         PriorityQueue<Edge> minPQ = MinimumPriorityQueue.create();
+        g.edges().forEach(minPQ::insert);
         UnionFind uf = new WeightedQuickUnionFind(g.getVertices());
 
         while (!minPQ.isEmpty() && minimumSpanningTree.size() < g.getVertices() - 1) {

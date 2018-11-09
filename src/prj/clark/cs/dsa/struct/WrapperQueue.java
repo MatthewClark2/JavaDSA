@@ -1,6 +1,7 @@
 package prj.clark.cs.dsa.struct;
 
 import prj.clark.cs.dsa.struct.deque.Deque;
+import prj.clark.cs.dsa.struct.deque.DoublyLinkedListDeque;
 
 import java.util.Iterator;
 
@@ -11,6 +12,10 @@ import java.util.Iterator;
  */
 public class WrapperQueue<E> implements Queue<E> {
     private Deque<E> cheat;
+
+    public WrapperQueue() {
+        cheat = new DoublyLinkedListDeque<>();
+    }
 
     @Override
     public int size() {
