@@ -3,6 +3,8 @@ package prj.clark.cs.dsa.algo.graph;
 import prj.clark.cs.dsa.struct.bag.Bag;
 import prj.clark.cs.dsa.struct.bag.StackBag;
 
+import java.util.NoSuchElementException;
+
 public class EdgeWeightedGraph {
     private final int vertices;
     private int edges;
@@ -14,6 +16,9 @@ public class EdgeWeightedGraph {
         this.vertices = vertices;
         this.edges = 0;
         adjacencyLists = (Bag<Edge>[]) (new Bag[vertices]);
+        for (int i = 0; i < vertices; ++i) {
+            adjacencyLists[i] = new StackBag<>();
+        }
     }
 
     public int getVertices() {
@@ -25,6 +30,8 @@ public class EdgeWeightedGraph {
     }
 
     public void addEdge(Edge e) {
+        validate(e);
+
         int i = e.either();
         int j = e.other(i);
 
@@ -63,5 +70,15 @@ public class EdgeWeightedGraph {
         sb.delete(sb.length() - 2, sb.length());
 
         return sb.toString();
+    }
+
+    private void validate(Edge e) {
+        int i = e.either();
+        int k = e.other(i);
+
+        if (i < 0 || k < 0 || i >= vertices || k >= vertices) {
+            // Attempt to add an edge between vertices that are not on the graph.
+            throw new NoSuchElementException();
+        }
     }
 }
