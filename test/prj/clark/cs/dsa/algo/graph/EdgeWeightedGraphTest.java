@@ -5,6 +5,7 @@ import prj.clark.cs.dsa.struct.stack.ArrayStack;
 
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.NoSuchElementException;
 import java.util.Set;
 
 import static org.junit.Assert.*;
@@ -80,7 +81,7 @@ public class EdgeWeightedGraphTest {
         };
 
         Set<Edge> expected = new HashSet<>();
-        init(10);
+        init(13);
 
         for (Edge e : data) {
             g.addEdge(e);
@@ -93,5 +94,32 @@ public class EdgeWeightedGraphTest {
         }
 
         assertEquals(0, expected.size());
+    }
+
+    @Test(expected = NoSuchElementException.class)
+    public void invalidEdgeThrowsException() {
+        init(10);
+        g.addEdge(edge(10, -1, 0.0));
+    }
+
+    @Test(expected = NoSuchElementException.class)
+    public void invalidAdjacentCheckThrowsException() {
+        init(10);
+        g.adjacents(10);
+    }
+
+    @Test(expected = NoSuchElementException.class)
+    public void negativeAdjacentCheckThrowsException() {
+        init(1);
+        g.adjacents(-1);
+    }
+
+    @Test
+    public void emptyAdjacentIterableHasNoElements() {
+        init(5);
+        g.addEdge(edge(1, 2, 1.0));
+        g.addEdge(edge(2, 3, 9.0));
+
+        assertFalse(g.adjacents(4).iterator().hasNext());
     }
 }
