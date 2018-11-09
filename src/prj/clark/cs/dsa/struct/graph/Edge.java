@@ -43,9 +43,14 @@ public class Edge implements Comparable<Edge> {
     public boolean equals(Object o) {
         if (o instanceof Edge) {
             Edge e = (Edge) o;
-            return e.weight == weight && e.v == v && e.w == w;
+            return weight == e.weight && ((v == e.v && w == e.w) || (w == e.v && v == e.w));
         }
 
         return false;
+    }
+
+    @Override
+    public int hashCode() {
+        return v + w + ((Double) weight).hashCode();
     }
 }
