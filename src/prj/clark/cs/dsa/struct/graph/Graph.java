@@ -15,9 +15,9 @@ public interface Graph {
 
     /**
      * Obtain an iterator of getVertices connected to e.
-     * @param e the node on the graph being searched.
+     * @param e the node on the mst being searched.
      * @return an iterator of getVertices.
-     * @throws NoSuchElementException if the node is not in the graph.
+     * @throws NoSuchElementException if the node is not in the mst.
      */
     Iterable<Integer> adjacent(int e);
 

@@ -1,7 +1,8 @@
-package prj.clark.cs.dsa.algo.graph;
+package prj.clark.cs.dsa.algo.mst;
 
 import org.junit.Test;
-import prj.clark.cs.dsa.struct.stack.ArrayStack;
+import prj.clark.cs.dsa.struct.graph.Edge;
+import prj.clark.cs.dsa.struct.graph.EdgeWeightedGraph;
 
 import java.util.Arrays;
 import java.util.HashSet;

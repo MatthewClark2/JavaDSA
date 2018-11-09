@@ -6,7 +6,7 @@ import prj.clark.cs.dsa.struct.bag.StackBag;
 import java.util.NoSuchElementException;
 
 /**
- * This class is useful for sparse, undirected graph implementations. Densely packed graphs may
+ * This class is useful for sparse, undirected mst implementations. Densely packed graphs may
  * prefer a matrix backed implementation.
  * This implementation is undirected.
  */
@@ -16,7 +16,7 @@ public class AdjacencyListGraph implements Graph {
     private Bag<Integer>[] adj;
 
     /**
-     * Creates a new Adjacency list graph with serialized integers as nodes.
+     * Creates a new Adjacency list mst with serialized integers as nodes.
      * @param vertices the number of available vertices. Available vertices to make connections between range from 0 to
      *                 this value minus 1.
      */

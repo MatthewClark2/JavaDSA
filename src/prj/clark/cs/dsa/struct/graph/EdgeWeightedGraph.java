@@ -1,7 +1,8 @@
-package prj.clark.cs.dsa.algo.graph;
+package prj.clark.cs.dsa.struct.graph;
 
 import prj.clark.cs.dsa.struct.bag.Bag;
 import prj.clark.cs.dsa.struct.bag.StackBag;
+import prj.clark.cs.dsa.struct.graph.Edge;
 
 import java.util.NoSuchElementException;
 

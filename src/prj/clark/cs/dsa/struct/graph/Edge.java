@@ -1,4 +1,4 @@
-package prj.clark.cs.dsa.algo.graph;
+package prj.clark.cs.dsa.struct.graph;
 
 public class Edge implements Comparable<Edge> {
     private final int v;
