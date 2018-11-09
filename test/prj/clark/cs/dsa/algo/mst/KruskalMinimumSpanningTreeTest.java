@@ -11,35 +11,19 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class KruskalMinimumSpanningTreeTest {
-    private EdgeWeightedGraph graphA;
-    private EdgeWeightedGraph graphB;
+    private EdgeWeightedGraph graph;
 
     @Before
     public void setUp() {
-        // This wastes time, but avoids any mutation between tests throwing off results.
-        graphA = new EdgeWeightedGraph(8);
-        graphA.addEdge(edge(0, 1, 1));
-        graphA.addEdge(edge(1, 2, 3));
-        graphA.addEdge(edge(2, 3, 9));
-        graphA.addEdge(edge(3, 4, 2));
-        graphA.addEdge(edge(4, 5, 4));
-        graphA.addEdge(edge(5, 6, 19));
-        graphA.addEdge(edge(0, 7, 9));
-        graphA.addEdge(edge(0, 6, 5));
-        graphA.addEdge(edge(3, 7, 11));
-        graphA.addEdge(edge(4, 7, 7));
-        graphA.addEdge(edge(4, 6, 21));
-        graphA.addEdge(edge(1, 7, 12));
-
-        graphB = new EdgeWeightedGraph(6);
-        graphB.addEdge(edge(0, 1, 2));
-        graphB.addEdge(edge(1, 3, 1));
-        graphB.addEdge(edge(3, 5, 5));
-        graphB.addEdge(edge(4, 5, 2));
-        graphB.addEdge(edge(0, 2, 3));
-        graphB.addEdge(edge(1, 2, 2));
-        graphB.addEdge(edge(2, 3, 7));
-        graphB.addEdge(edge(2, 4, 4));
+        graph = new EdgeWeightedGraph(6);
+        graph.addEdge(edge(0, 1, 2));
+        graph.addEdge(edge(1, 3, 1));
+        graph.addEdge(edge(3, 5, 5));
+        graph.addEdge(edge(4, 5, 2));
+        graph.addEdge(edge(0, 2, 3));
+        graph.addEdge(edge(1, 2, 2));
+        graph.addEdge(edge(2, 3, 7));
+        graph.addEdge(edge(2, 4, 4));
     }
 
     private static Edge edge(int w, int v, double weight) {
@@ -68,13 +52,13 @@ public class KruskalMinimumSpanningTreeTest {
 
     @Test
     public void basicGraphMSTWeight() {
-        MinimumSpanningTree mst = new KruskalMinimumSpanningTree(graphB);
+        MinimumSpanningTree mst = new KruskalMinimumSpanningTree(graph);
         assertEquals(11, mst.weight(), 0);
     }
 
     @Test
     public void basicGraphMSTEdges() {
-        MinimumSpanningTree mst = new KruskalMinimumSpanningTree(graphB);
+        MinimumSpanningTree mst = new KruskalMinimumSpanningTree(graph);
 
         Set<Edge> expected = new HashSet<>();
 

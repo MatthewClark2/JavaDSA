@@ -69,7 +69,10 @@ public class KruskalMinimumSpanningTree implements MinimumSpanningTree {
 
     private String stringify() {
         StringBuilder sb = new StringBuilder();
-        edges().forEach(x -> sb.append("x, "));
+        edges().forEach(x -> {
+            sb.append(x);
+            sb.append(", ");
+        });
         sb.delete(sb.length() - 2, sb.length());
         sb.append(" : Total Weight - ");
         sb.append(weight);
