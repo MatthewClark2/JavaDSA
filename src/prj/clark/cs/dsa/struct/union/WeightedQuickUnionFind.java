@@ -1,5 +1,7 @@
 package prj.clark.cs.dsa.struct.union;
 
+import java.util.NoSuchElementException;
+
 public class WeightedQuickUnionFind implements UnionFind {
     private int[] siteIDs;
     private int[] componentSizes;
@@ -19,12 +21,16 @@ public class WeightedQuickUnionFind implements UnionFind {
             siteIDs[i] = i;
         }
 
-        // Needlessly terse code that initializes all elements of the array to 1.
-        for (int i = 0; i < components; ++i, ++componentSizes[i]);
+        for (int i = 0; i < components; ++i) {
+            componentSizes[i] = 1;
+        }
     }
 
     @Override
     public void makeUnion(int p, int q) {
+        validate(p);
+        validate(q);
+
         int i = find(p);
         int j = find(q);
 
@@ -44,6 +50,8 @@ public class WeightedQuickUnionFind implements UnionFind {
 
     @Override
     public int find(int p) {
+        validate(p);
+
         while (p != siteIDs[p]) {
             p = siteIDs[p];
         }
@@ -53,11 +61,20 @@ public class WeightedQuickUnionFind implements UnionFind {
 
     @Override
     public boolean connected(int p, int q) {
+        validate(p);
+        validate(q);
+
         return find(p) == find(q);
     }
 
     @Override
     public int count() {
         return count;
+    }
+
+    private void validate(int k) {
+        if (k < 0 || k >= siteIDs.length) {
+            throw new NoSuchElementException();
+        }
     }
 }
