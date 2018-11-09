@@ -1,7 +1,8 @@
-package prj.clark.cs.dsa.struct;
+package prj.clark.cs.dsa.struct.queue;
 
 import prj.clark.cs.dsa.struct.deque.Deque;
 import prj.clark.cs.dsa.struct.deque.DoublyLinkedListDeque;
+import prj.clark.cs.dsa.struct.queue.Queue;
 
 import java.util.Iterator;
 

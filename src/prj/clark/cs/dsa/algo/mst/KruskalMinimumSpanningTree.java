@@ -1,7 +1,7 @@
 package prj.clark.cs.dsa.algo.mst;
 
-import prj.clark.cs.dsa.struct.Queue;
-import prj.clark.cs.dsa.struct.WrapperQueue;
+import prj.clark.cs.dsa.struct.queue.Queue;
+import prj.clark.cs.dsa.struct.queue.WrapperQueue;
 import prj.clark.cs.dsa.struct.graph.Edge;
 import prj.clark.cs.dsa.struct.graph.EdgeWeightedGraph;
 import prj.clark.cs.dsa.struct.queue.MinimumPriorityQueue;
@@ -29,6 +29,7 @@ public class KruskalMinimumSpanningTree implements MinimumSpanningTree {
 
     /**
      * Creates a new spanning tree utilizing the greedy Kruskal algorithm implementation.
+     *
      * @param g the mst from which the MST is to be formed.
      */
     public KruskalMinimumSpanningTree(EdgeWeightedGraph g) {

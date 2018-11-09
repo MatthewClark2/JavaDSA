@@ -47,7 +47,7 @@ public class HeapSelectTest {
         Integer[] data = new Integer[]{1, 2, 3, 4, 5, 6};
 
         for (Integer i : data) {
-            assertEquals((Integer) i, selector.nthSmallest(data, i - 1));
+            assertEquals(i, selector.nthSmallest(data, i - 1));
         }
     }
 }

@@ -1,4 +1,4 @@
-package prj.clark.cs.dsa.struct;
+package prj.clark.cs.dsa.struct.queue;
 
 public interface Queue<E> extends Iterable<E> {
     int size();
