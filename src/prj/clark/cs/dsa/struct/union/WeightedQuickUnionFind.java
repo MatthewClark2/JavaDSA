@@ -21,7 +21,7 @@ public class WeightedQuickUnionFind implements UnionFind {
             siteIDs[i] = i;
         }
 
-        for (int i = 0; i < components; ++componentSizes[i++]); 
+        for (int i = 0; i < components; ++componentSizes[i++]);
     }
 
     @Override

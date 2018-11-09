@@ -55,9 +55,12 @@ public class EdgeWeightedGraph {
     public String toString() {
         StringBuilder sb = new StringBuilder();
 
-        for (Edge edge : edges()) {
-            sb.append(edge);
-        }
+        edges().forEach(x -> {
+            sb.append(x);
+            sb.append(", ");
+        });
+
+        sb.delete(sb.length() - 2, sb.length());
 
         return sb.toString();
     }
